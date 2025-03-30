@@ -64,7 +64,7 @@ class VideoProcessor:
         self.current_img = self.sum_gi_srci / (self.sum_gi[:, :, np.newaxis] + 1e-6)
         clip_image(self.current_img)
         self.current_img = np.clip(self.current_img, 0, 255).astype(np.float32)
-        self.enhanced_img = enhance_image(self.current_img.astype(np.uint8), saturation_factor=1.5, sharpness_factor=1.6, contrast_factor=1.5)
+        self.enhanced_img = enhance_image(self.current_img.astype(np.uint8), saturation_factor=1, sharpness_factor=1.6, contrast_factor=1.2)
         print(f"初始化 VideoProcessor 完成，形状: {self.enhanced_img.shape}, 类型: {self.enhanced_img.dtype}")
 
 def process_frame(frame, video_processor):
@@ -76,7 +76,7 @@ def process_frame(frame, video_processor):
     clip_image(video_processor.current_img)
 
     current_img_uint8 = video_processor.current_img.astype(np.uint8)
-    enhanced_img = enhance_image(current_img_uint8, saturation_factor=1.5, sharpness_factor=1.6, contrast_factor=1.5)
+    enhanced_img = enhance_image(current_img_uint8, saturation_factor=1, sharpness_factor=1.6, contrast_factor=1.2)
 
     return enhanced_img
 
